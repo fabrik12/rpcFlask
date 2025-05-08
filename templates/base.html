@@ -1,0 +1,16 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Mi Aplicación{% endblock %}</title>
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <h1>Bienvenido - Mi App</h1>
+    </header>
+    <div class="content">{% block content %}{% endblock %}</div>
+    <footer>© 2025 Mi Aplicación</footer>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
