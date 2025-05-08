@@ -93,6 +93,7 @@ class RpcClient(object):
         message.publish(routing_key=self.rpc_queue)
 
         # Return the Unique ID used to identify the request.
+        print(f"Enviando mensaje con correlation_id: {message.correlation_id}")
         return message.correlation_id
 
 
