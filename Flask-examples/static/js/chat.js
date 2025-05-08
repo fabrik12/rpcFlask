@@ -72,6 +72,7 @@
 
     // jQuery
     $(function () {
+        //Detectar Click
         $('.send_message').click(function (e) {
             triggerSend();
         });
