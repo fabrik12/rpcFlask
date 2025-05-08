@@ -1,0 +1,20 @@
+<!-- templates/index.html -->
+{% extends "base.html" %} {% block title %} Enviar Mensaje RPC {% endblock %} {%
+block content %}
+<h2>Enviar Mensaje a través de RPC</h2>
+<form method="post">
+  <label for="mensaje">Mensaje:</label>
+  <input
+    type="text"
+    name="mensaje"
+    id="mensaje"
+    placeholder="Escribe aquí tu mensaje"
+    required
+  />
+  <button type="submit">Enviar</button>
+</form>
+
+{% if respuesta %}
+<h3>Respuesta del servidor:</h3>
+<p>{{ respuesta }}</p>
+{% endif %} {% endblock %}
