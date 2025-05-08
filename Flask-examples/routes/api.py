@@ -6,23 +6,26 @@ from ampq_client.rpc_client import get_rpc_client
 
 api = Blueprint('api', __name__)
 
-# Asumiendo que instancias RPC_CLIENT en un módulo de configuración o en app.py
-@api.route('/', methods=['GET', 'POST'])
+@api.route('/', methods=['GET'])
 def home():
-    response = None
-    if request.method == 'POST':
-        mensaje = request.form.get('mensaje')
-        if mensaje:
-            # DEBUG
-            rpc_client = get_rpc_client()
+    return render_template('index.html')
 
-            # Se envía la solicitud RPC
-            corr_id = rpc_client.send_request(mensaje)
-            # Espera activa con un pequeño sleep (pendiente implementar un timeout)
-            while rpc_client.queue.get(corr_id) is None:
-                sleep(0.1)
-            response = rpc_client.queue[corr_id]
-    return render_template('index.html', respuesta=response)
+@api.route('/rpc_call', methods=['POST'])
+def rpc_call():
+    response = None
+    mensaje = request.form.get('mensaje')
+    if mensaje:
+        # DEBUG
+        rpc_client = get_rpc_client()
+
+        # Se envía la solicitud RPC
+        corr_id = rpc_client.send_request(mensaje)
+        # Espera activa con un pequeño sleep (pendiente implementar un timeout)
+        while rpc_client.queue.get(corr_id) is None:
+            sleep(0.1)
+        response = rpc_client.queue[corr_id]
+        return jsonify(response=response)
+    return jsonify(response="No se recibio mensaje"), 400
 
 
 '''

@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>{% block title %}Mi Aplicación{% endblock %}</title>
+    {% block extra_css %}{% endblock %}
   </head>
   <body>
     <header>
@@ -10,5 +11,6 @@
     </header>
     <div class="content">{% block content %}{% endblock %}</div>
     <footer>© 2025 Mi Aplicación</footer>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>

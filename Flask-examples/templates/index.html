@@ -1,20 +1,52 @@
 <!-- templates/index.html -->
-{% extends "base.html" %} {% block title %} Enviar Mensaje RPC {% endblock %} {%
-block content %}
-<h2>Enviar Mensaje a través de RPC</h2>
-<form method="post">
-  <label for="mensaje">Mensaje:</label>
-  <input
-    type="text"
-    name="mensaje"
-    id="mensaje"
-    placeholder="Escribe aquí tu mensaje"
-    required
-  />
-  <button type="submit">Enviar</button>
-</form>
-
-{% if respuesta %}
-<h3>Respuesta del servidor:</h3>
-<p>{{ respuesta }}</p>
-{% endif %} {% endblock %}
+{% extends "base.html" %} {% block title %} Chat - RPC {% endblock %} {% block
+extra_css %}
+<!-- Hoja de estilos del chat -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/chat.css') }}"
+/>
+<!-- CDN para Bootstrap -->
+<link
+  href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+{% endblock %} {% block content %}
+<div class="chat_window">
+  <div class="top_menu">
+    <div class="buttons">
+      <div class="button close"></div>
+      <div class="button minimize"></div>
+      <div class="button maximize"></div>
+    </div>
+    <div class="title">Chat</div>
+  </div>
+  <ul class="messages"></ul>
+  <div class="bottom_wrapper clearfix">
+    <div class="message_input_wrapper">
+      <!-- Input para mensaje -->
+      <input class="message_input" placeholder="Escribe tu mensaje aqui..." />
+    </div>
+    <!-- Boton para enviar mensaje -->
+    <div class="send_message">
+      <div class="icon"></div>
+      <div class="text">Send</div>
+    </div>
+  </div>
+</div>
+<div class="message_template">
+  <li class="message">
+    <div class="avatar"></div>
+    <div class="text_wrapper">
+      <div class="text"></div>
+    </div>
+  </li>
+</div>
+{% endblock %} {% block extra_js %}
+<!-- Incluye jQuery y Bootstrap JS desde CDN -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Incluye el script del chat desde la carpeta estática -->
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}
